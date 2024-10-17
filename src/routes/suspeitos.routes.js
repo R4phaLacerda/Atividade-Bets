@@ -11,7 +11,6 @@ let suspeitos = [
     envolvimentoApostas: 'Sim',
     nivelApostas: 'Alto'
   } 
-  
 ]
 
 // Rota para listar todos os suspeitos
@@ -21,20 +20,20 @@ suspeitosRoutes.get("/", (req, res) => {
 
 // Rota para cadastrar um novo suspeito
 suspeitosRoutes.post("/", (req, res) => {
-  const { nome, partido, idade, segundo, propostas } = req.body;
+  const { nome, profissao, envolvimentoApostas, nivelApostas } = req.body;
 
-  // Validação dos campos nome e partido
-  if (!nome || !partido) {
+  // Validação dos campos nome e profissao
+  if (!nome || !profissao) {
     return res.status(400).send({
-      message: "O nome ou o partido não foi preenchido, criança aleatória!",
+      message: 'Nome e profissão são obrigatórios algum deles está faltando.',
     });
   }
 
-  // Validação de idade
-  if (idade < 18) {
+  // Validação de nivelAposta
+  if (nivelAposta != 'Baixo' || nivelAposta != 'Médio' || nivelAposta != 'Alto') {
     return res.status(400).send({
       message:
-        "O suspeito não possui idade suficiente para participar deste debate!",
+        'O nível de suspeita deve ser classificado como baixo, médio ou alto.',
     });
   }
 
@@ -42,10 +41,9 @@ suspeitosRoutes.post("/", (req, res) => {
   const novosuspeito = {
     id: Math.floor(Math.random() * 1000000),
     nome,
-    partido,
-    idade,
-    segundo,
-    propostas,
+    profissao,
+    envolvimentoApostas,
+    nivelAposta
   };
 
   // Adiciona o novo suspeito ao array de suspeitos
@@ -53,7 +51,7 @@ suspeitosRoutes.post("/", (req, res) => {
 
   return res.status(201).json({
     message: "suspeito cadastrado com sucesso!",
-    novosuspeito,
+    novoSuspeito,
   });
 });
 
@@ -77,7 +75,7 @@ suspeitosRoutes.get("/:id", (req, res) => {
 // Rota para atualizar um suspeito pelo id
 suspeitosRoutes.put("/:id", (req, res) => {
   const { id } = req.params;
-  const { nome, partido, idade, segundo, propostas } = req.body;
+  const { nome, profissao, nivelAposta, segundo, propostas } = req.body;
 
   // Busca um suspeito pelo id no array de suspeitos
   const suspeito = suspeitos.find((acusado) => acusado.id == id);
@@ -89,16 +87,16 @@ suspeitosRoutes.put("/:id", (req, res) => {
       .json({ message: `suspeito com id ${id} não encontrado!` });
   }
 
-  // Validação dos campos nome e partido
-  if (!nome || !partido) {
+  // Validação dos campos nome e profissao
+  if (!nome || !profissao) {
     return res.status(400).send({
-      message: "O nome ou o partido não foi preenchido, criança aleatória!",
+      message: "O nome ou o profissao não foi preenchido, criança aleatória!",
     });
   }
 
   suspeito.nome = nome;
-  suspeito.partido = partido;
-  suspeito.idade = idade;
+  suspeito.profissao = profissao;
+  suspeito.nivelAposta = nivelAposta;
   suspeito.segundo = segundo;
   suspeito.propostas = propostas;
 
