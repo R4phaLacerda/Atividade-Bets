@@ -1,0 +1,15 @@
+{
+  "name": "atividade-bets",
+  "version": "1.0.0",
+  "description": "Atividade proposta do felipe dev sobre apostas.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "atividade",
+    "bets"
+  ],
+  "author": "Raphaelle Lacerda",
+  "license": "MIT"
+}
