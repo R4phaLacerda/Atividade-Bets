@@ -6,6 +6,10 @@ const suspeitosRoutes = Router();
 let suspeitos = [
   {
     id: Math.floor(Math.random() * 1000000),
+    nome: 'João Vitor Porto Sales',
+    profissao: 'Estudantes',
+    envolvimentoApostas: 'Sim',
+    nivelApostas: 'Alto'
   } 
   
 ]
